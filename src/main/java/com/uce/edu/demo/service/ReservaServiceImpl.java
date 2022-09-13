@@ -5,6 +5,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,7 @@ public class ReservaServiceImpl implements IReservaService {
 	private IClienteRepository clienteRepository;
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Reserva reservarVehiculo(String placa, String cedula, String inicio, String fin) {
 		Vehiculo vehiculo = this.vehiculoRepository.buscarPorPlaca(placa);
 		Cliente cliente = this.clienteRepository.buscarCedula(cedula);
@@ -42,13 +46,19 @@ public class ReservaServiceImpl implements IReservaService {
 		int dias = Period.between(fInicio, fFin).getDays() + 1;
 
 		Reserva reserva = new Reserva();
-		reserva.setNumero(cedula);
+
+		int numero = (int) (Math.random() * 100 + 1);
+		String cadena = cedula.substring(0, 5);
+		String codigoReserva = "R" + numero + "-" + cadena;
+
+		reserva.setNumeroReserva(cedula);
 		reserva.setDiasReserva(dias);
 		reserva.setFechaInicio(inicio);
 		reserva.setFechaFin(fin);
 		reserva.setEstado("Reservado");
 		reserva.setCliente(cliente);
 		reserva.setVehiculo(vehiculo);
+		reserva.setNumero(codigoReserva);
 
 		this.reservaRepository.guardar(reserva);
 		System.out.println("El vehiculo ha sido reservado");
@@ -56,6 +66,7 @@ public class ReservaServiceImpl implements IReservaService {
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public boolean buscarvehiculoDisponible(String placa, String inicio, String fin) {
 		List<Reserva> reservas = this.reservaRepository.buscarReserva(placa);
 		LocalDate fInicio = LocalDate.parse(inicio);
@@ -84,6 +95,7 @@ public class ReservaServiceImpl implements IReservaService {
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void retiro(String numero) {
 		Reserva reserva = this.reservaRepository.buscarAutoReserva(numero);
 		reserva.setEstado("Retirado");
@@ -95,11 +107,13 @@ public class ReservaServiceImpl implements IReservaService {
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Reserva buscarAutoReserva(String numero) {
 		return this.reservaRepository.buscarAutoReserva(numero);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<ReservaTo> buscarPorFechas(String fechaInicio, String fechaFin) {
 
 		List<ReservaTo> listaReporte = new ArrayList<>();
@@ -131,6 +145,7 @@ public class ReservaServiceImpl implements IReservaService {
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public RetiroTo buscarReservas(String numero) {
 		// TODO Auto-generated method stub
 		return this.reservaRepository.buscarReservas(numero);

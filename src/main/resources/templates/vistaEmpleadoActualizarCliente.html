@@ -10,16 +10,11 @@
 </head>
 
 <body>
-	<div>
-		<ul class="nav nav-tabs">
-			<li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="/empleados/inicio">Budget Empleados</a>
-			</li>
-		</ul>
-	</div>
-	<h1>Actualizar Cliente</h1>
+	<center>
+		<h1>Actualizar Cliente</h1>
+	</center>
 	<form th:action="@{/empleados/actualizarCliente/{id}(id=${cliente.id})}" th:object="${cliente}" th:method="PUT">
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label>Cedula:</label></td>
 				<td><input type="text" id="cedula" th:field="${cliente.numeroCedula}"></td>
@@ -50,7 +45,7 @@
 				<td><input type="text" id="registro" th:field="${cliente.registro}"></td>
 			</tr>
 		</table>
-		<input class="btn btn-success" type="submit" value="Actualizar">
+		<input class="btn btn-secondary" type="submit" value="Actualizar">
 	</form>
 </body>
 

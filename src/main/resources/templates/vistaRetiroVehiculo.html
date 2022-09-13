@@ -11,9 +11,15 @@
 </head>
 
 <body>
-
+	<div>
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="/empleados/inicio">Budget Empleados</a>
+			</li>
+		</ul>
+	</div>
 	<form th:action="@{/empleados/insertarRetiro}" th:object="${retiro}" th:method="POST">
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label>Numero:</label></td>
 				<td><input type="text" id="numero" th:field="${retiro.numero}"></td>
@@ -29,7 +35,7 @@
 			<tr>
 				<td><label>Estado:</label></td>
 				<td><input type="text" id="estado" th:field="${retiro.estado}"></td>
-			</tr>		
+			</tr>
 			<tr>
 				<td><label>Fecha Inicio:</label></td>
 				<td><input type="date" id="fechaInicio" th:field="${retiro.fechaInicio}"></td>
@@ -43,7 +49,7 @@
 				<td><input type="text" id="reservado" th:field="${retiro.cedula}"></td>
 			</tr>
 		</table>
-		<input class="btn btn-success" type="submit" value="Retirar">
+		<input class="btn btn-secondary" type="submit" value="Retirar">
 	</form>
 </body>
 

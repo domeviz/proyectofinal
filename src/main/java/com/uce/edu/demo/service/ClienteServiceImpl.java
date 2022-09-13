@@ -7,6 +7,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,21 +25,25 @@ public class ClienteServiceImpl implements IClienteService {
 	private IClienteRepository iClienteRepository;
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<Cliente> buscarPorApellido(String apellido) {
 		return this.iClienteRepository.buscarPorApellido(apellido);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void eliminar(Integer id) {
 		this.iClienteRepository.eliminar(id);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Cliente buscarPorId(Integer id) {
 		return this.iClienteRepository.buscarPorId(id);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void actualizar(Cliente cliente) {
 		Cliente c = this.buscarPorId(cliente.getId());
 		String cedu = c.getNumeroCedula();
@@ -49,28 +56,33 @@ public class ClienteServiceImpl implements IClienteService {
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void registro(Cliente cliente) {
 		cliente.setRegistro("C");
 		this.iClienteRepository.insertar(cliente);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void registroComoEmpleado(Cliente cliente) {
 		cliente.setRegistro("E");
 		this.iClienteRepository.insertar(cliente);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Cliente buscarPorCedula(String cedula) {
 		return this.iClienteRepository.buscarCedula(cedula);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<Cliente> buscarTodos() {
 		return this.iClienteRepository.buscarTodos();
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<ClienteVip> reporteClientesVip() {
 		List<Cliente> listaClientes = this.buscarTodos();
 		List<ClienteVip> clientesVip = new ArrayList<ClienteVip>();

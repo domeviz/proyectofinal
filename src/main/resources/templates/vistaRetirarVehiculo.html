@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lista Vehiculos</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+	<div>
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="/empleados/inicio">Budget Empleados</a>
+			</li>
+		</ul>
+	</div>
+
+	<body>
+		<h1 position=style="color:DodgerBlue;">Retirar Vehiculo Reservado</h1>
+		<form th:action="@{/empleados/retirarVehiculo}" th:object="${retiroTo}" th:method="GET">
+			<table>
+				<tr>
+					<td><label>Numero:</label></td>
+					<td><input type="search" id="numero" th:field="${retiroTo.numero}"></td>
+				</tr>
+			</table>
+			<input class="btn btn-secondary" type="submit" value="Retirar Vehiculo">
+		</form>
+
+		<h1 position=style="color:DodgerBlue;">Retirar Vehiculo sin reserva</h1>
+		<form th:action="@{/empleados/retirarSinReserva}" th:object="${retiroTo}" th:method="GET">
+			<input class="btn btn-secondary" type="submit" value="Retirar sin reserva">
+		</form>
+
+	</body>
+</body>
+
+</html>

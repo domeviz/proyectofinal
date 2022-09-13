@@ -20,6 +20,7 @@ public class ClienteRepositoryImpl implements IClienteRepository{
 	private EntityManager entityManager;
 	
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Cliente buscarCedula(String cedula) {
 		TypedQuery<Cliente> myQuery=this.entityManager.createQuery(
 				"SELECT c FROM Cliente c WHERE c.numeroCedula=:datoCedula"
@@ -28,10 +29,8 @@ public class ClienteRepositoryImpl implements IClienteRepository{
 		return myQuery.getSingleResult();
 	}
 	
-	
-	
-	
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void insertar(Cliente cliente) {
 		this.entityManager.persist(cliente);
 	}
@@ -49,18 +48,19 @@ public class ClienteRepositoryImpl implements IClienteRepository{
 		return this.entityManager.find(Cliente.class, id);
 	}
 	@Override
-	//@Transactional(value = TxType.MANDATORY)
+	@Transactional(value = TxType.MANDATORY)
 	public void eliminar(Integer id) {
 		this.entityManager.remove(this.buscarPorId(id));
 	}
 
 	@Override
-	//transactional
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizar(Cliente cliente) {
 		this.entityManager.merge(cliente);
 	}
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Cliente> buscarTodos() {
 		TypedQuery<Cliente> myQuery = this.entityManager.createQuery("SELECT c FROM Cliente c", Cliente.class);
 		return myQuery.getResultList();

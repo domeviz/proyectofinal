@@ -12,41 +12,44 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cliente")
+@Table(name = "cliente")
 public class Cliente {
-	
+
 	@Id
-	@Column(name="clie_id")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator ="clie_id_seq" )
-	@SequenceGenerator(name="clie_id_seq", sequenceName = "clie_id_seq", allocationSize =1 )
+	@Column(name = "clie_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clie_id_seq")
+	@SequenceGenerator(name = "clie_id_seq", sequenceName = "clie_id_seq", allocationSize = 1)
 	private Integer id;
-	
-	@Column(name="clie_nombre")
+
+	@Column(name = "clie_nombre")
 	private String nombre;
-	
-	@Column(name="clie_apellido")
+
+	@Column(name = "clie_apellido")
 	private String apellido;
-	
-	@Column(name="clie_numero_cedula")
+
+	@Column(name = "clie_numero_cedula")
 	private String numeroCedula;
-	
-	@Column(name="clie_fecha_nacimiento")
+
+	@Column(name = "clie_fecha_nacimiento")
 	private String fechaNacimiento;
-	
-	@Column(name="clie_genero")
+
+	@Column(name = "clie_genero")
 	private String genero;
-	
-	@Column(name="clie_telefono")
+
+	@Column(name = "clie_telefono")
 	private String telefono;
-	
-	@Column(name="clie_registro")
+
+	@Column(name = "clie_registro")
 	private String registro;
-	
-	//Relacion uno a muchos con reserva
-	@OneToMany(mappedBy ="cliente")
+
+	@Column(name = "clie_correo")
+	private String correo;
+
+	// Relacion uno a muchos con reserva
+	@OneToMany(mappedBy = "cliente")
 	private List<Reserva> reservas;
 
-	//SET y GET
+	// SET y GET
 	public Integer getId() {
 		return id;
 	}
@@ -119,13 +122,19 @@ public class Cliente {
 		this.reservas = reservas;
 	}
 
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", numeroCedula=" + numeroCedula
 				+ ", fechaNacimiento=" + fechaNacimiento + ", genero=" + genero + ", telefono=" + telefono
 				+ ", registro=" + registro + "]";
 	}
-	
-	
 
 }

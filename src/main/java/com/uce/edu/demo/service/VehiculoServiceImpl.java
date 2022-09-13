@@ -8,6 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,54 +26,64 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	private IVehiculoRepository iVehiculoRepository;
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<Vehiculo> vehiculosDisponibles(String marca, String modelo) {
 		return this.iVehiculoRepository.vehiculosDisponibles(marca, modelo);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Vehiculo buscarPorId(Integer id) {
 		return this.iVehiculoRepository.buscarPorId(id);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void insertar(Vehiculo vehiculo) {
 		vehiculo.setEstado("Disponible");
 		this.iVehiculoRepository.ingresarVehiculo(vehiculo);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void actualizar(Vehiculo vehiculo) {
 		this.iVehiculoRepository.actualizarEstado(vehiculo);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void eliminar(Integer id) {
 		this.iVehiculoRepository.eliminar(id);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<Vehiculo> buscarTodos() {
 		return this.iVehiculoRepository.buscarTodos();
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<Vehiculo> buscarPorMarca(String marca) {
 		return this.iVehiculoRepository.buscarPorMarca(marca);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Vehiculo buscarPorPlaca(String placa) {
 		// TODO Auto-generated method stub
 		return this.iVehiculoRepository.buscarPorPlaca(placa);
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<Vehiculo> buscarFechas(String fechaInicio, String fechaFin) {
 		// TODO Auto-generated method stub
 		return this.iVehiculoRepository.buscarPorFechas(fechaInicio, fechaFin);
 	}
-	
+
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public List<VehiculoVip> reporteVehiculosVip(Integer mes, Integer anio) {
 		LocalDate fechaInicio = LocalDate.of(anio, mes, 1);
 		LocalDate fechaFin;

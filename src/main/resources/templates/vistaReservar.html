@@ -14,7 +14,7 @@
 	<body>
 
 		<form th:action="@{/clientes/generarReserva}" th:object="${datoReserva}" th:method="POST">
-			<table>
+			<table class="table table-hover">
 				<tr>
 					<td><label>Placa:</label></td>
 					<td><input type="text" id="placa" th:field="${datoReserva.placa}"></td>
@@ -36,7 +36,7 @@
 					<td><input type="text" id="fechaFin" th:field="${datoReserva.tarjeta}"></td>
 				</tr>
 			</table>
-			<input class="btn btn-success" type="submit" value="RESERVAR">
+			<input class="btn btn-secondary" type="submit" value="Reservar">
 		</form>
 	</body>
 </body>

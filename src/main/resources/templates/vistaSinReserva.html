@@ -12,9 +12,8 @@
 
 <body>
 
-
 	<form th:action="@{/clientes/buscarAutos}" th:object="${vehiculo}" th:method="GET">
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label>Modelo:</label></td>
 				<td><input type="text" id="modelo" th:field="${vehiculo.modelo}"></td>
@@ -26,24 +25,24 @@
 			</tr>
 
 		</table>
-		<input class="btn btn-success" type="submit" value="Buscar Vehiculo">
+		<input class="btn btn-secondary" type="submit" value="Buscar Vehiculo">
 	</form>
 
 
 
 	<form th:action="@{/clientes/mostrarDisponibles}">
-		<input class="btn btn-success" type="submit" value="Reservar">
+		<input class="btn btn-secondary" type="submit" value="Reservar">
 	</form>
 
 	<h1 position=style="color:DodgerBlue;">Retirar Vehiculo Reservado</h1>
 	<form th:action="@{/empleados/retirarVehiculo}" th:object="${retiroTo}" th:method="GET">
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label>Numero:</label></td>
 				<td><input type="search" id="numero" th:field="${retiroTo.numero}"></td>
 			</tr>
 		</table>
-		<input class="btn btn-success" type="submit" value="Retirar Vehiculo">
+		<input class="btn btn-secondary" type="submit" value="Retirar Vehiculo">
 	</form>
 
 </body>

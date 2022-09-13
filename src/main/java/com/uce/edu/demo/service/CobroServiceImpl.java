@@ -3,6 +3,9 @@ package com.uce.edu.demo.service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ public class CobroServiceImpl implements ICobroService {
 	private ICobroRepository cobroRepository;
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void realizarPago(String numeroTarjeta, BigDecimal renta, Reserva reserva) {
 
 		BigDecimal rentaDias = renta.multiply(new BigDecimal(reserva.getDiasReserva()));

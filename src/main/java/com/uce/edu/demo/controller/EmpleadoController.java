@@ -198,4 +198,9 @@ public class EmpleadoController {
 		modelo.addAttribute("retiroTo", retiroTo);
 		return "vistaSinReserva";
 	}
+	
+	@GetMapping("/retiroVehiculo")
+	public String retiroVehiculo(RetiroTo retiroTo) {
+		return "vistaRetirarVehiculo";
+	}
 }
